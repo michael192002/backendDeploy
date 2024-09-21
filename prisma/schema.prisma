@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+model Employee {
+  id            String   @id// Unique identifier
+  name          String   // Name of the employee
+  email_address String   @unique // Unique email address
+  phone_number  String   @unique // Unique phone number
+  gender        String   // Gender of the employee (Male/Female)
+  cafeId        String?   // Foreign key to Cafe
+  start         DateTime?
+  cafe          Cafe?     @relation(fields: [cafeId], references: [id]) // Establishing the relation
+}
+
+model Cafe {
+  id          String    @id @default(uuid()) // UUID for the cafe
+  name        String    @unique // Name of the cafe
+  description String    // Short description of the cafe
+  logo        String?   // Optional logo field
+  location    String    // Required location of the cafe
+  employees   Employee[] // One-to-many relationship
+}
