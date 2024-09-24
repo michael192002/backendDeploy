@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
               where: {
                   cafe: {
                   name: {
-                      equals: query,
+                      equals: decodeURIComponent(query as string),
                   },
                   },
               },
@@ -34,14 +34,19 @@ export async function GET(request: NextRequest) {
               },
           });
     }
-    const responseDTO = employees.map(employee => ({
+    let responseDTO = employees.map(employee => ({
           id : employee.id,
           name  : employee.name,
           email_address : employee.email_address,
-          employees : employee.phone_number,
+          phone_number : employee.phone_number,
           days_worked :  employee.start ? Math.floor((Date.now() - new Date(employee.start).getTime()) / (1000 * 60 * 60 * 24)) : null,
           cafe : employee.cafe.name,
     }))
+    responseDTO = responseDTO.sort((x, y) => {
+        const xDays = x.days_worked || 0;
+        const yDays = y.days_worked || 0;
+        return yDays - xDays;
+      });    
     return Response.json(responseDTO);
    } catch (error) {
       console.log(error);

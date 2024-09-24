@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
               cafes = await prisma.cafe.findMany({
                   where: {
                       location: {
-                          equals: query, // Exact match
+                          equals: decodeURIComponent(query as string), // Exact match
                       },
                   },
                   include: {
@@ -32,7 +32,8 @@ export async function GET(request: NextRequest) {
                   },
               });
           }
-          const responseDTO = cafes.map(cafe => ({...cafe, employees : cafe?.employees?.length}))
+          let responseDTO = cafes.map(cafe => ({...cafe, employees : cafe?.employees?.length}))
+          responseDTO = responseDTO.sort((x,y) => y.employees - x.employees);
           return Response.json(responseDTO);
       } catch (error) {
           return new Response(`Webhook error`, {
