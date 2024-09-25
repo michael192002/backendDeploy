@@ -36,6 +36,7 @@ export async function GET(request: NextRequest) {
           responseDTO = responseDTO.sort((x,y) => y.employees - x.employees);
           return Response.json(responseDTO);
       } catch (error) {
+          console.log(error)
           return new Response(`Webhook error`, {
               status: 400,
           })
