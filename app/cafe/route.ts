@@ -29,7 +29,6 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
     try {
         const obj : Cafe = await request.json()
-        console.log(obj);
         await prisma.cafe.create({
             data : obj
         });

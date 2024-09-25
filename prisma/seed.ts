@@ -4,19 +4,19 @@ async function main() {
     const cafes = await prisma.cafe.createMany({
         data: [
           {
-            name: 'The Java House',
+            name: 'The Java',
             description: 'A cozy place to enjoy the finest coffees.',
             logo: null,
             location: '123 Coffee Lane, Brew City',
           },
           {
-            name: 'Brewed Awakening',
+            name: 'Brewedss',
             description: 'Wake up and smell the coffee!',
             logo: null, // No logo provided
             location: '456 Espresso St, Caffeine Town',
           },
           {
-            name: 'Café Mocha',
+            name: 'Café Moc',
             description: 'A perfect blend of coffee and culture.',
             logo: null,
             location: '789 Latte Ave, Java City',
