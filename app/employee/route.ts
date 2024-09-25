@@ -10,7 +10,6 @@ export async function GET(request: NextRequest) {
     const query : string | null = searchParams.get('id')
     let employee : any;
     try {
-        let employee : any;
         employee = await prisma.employee.findFirst({
             where: {
                 id: {
