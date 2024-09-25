@@ -7,12 +7,15 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "postinstall": "prisma generate",
     "vercel-build": "prisma generate && prisma migrate deploy && next build"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
+    "@neondatabase/serverless": "^0.9.5",
+    "@prisma/adapter-neon": "^5.20.0",
     "@prisma/client": "^5.19.1",
     "next": "14.2.13",
     "react": "^18",
